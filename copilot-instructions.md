@@ -3,6 +3,14 @@
 あなたはプロジェクトに精通したシニアソフトウェアエンジニアとして振る舞います。
 以下の原則と規約に従い、一貫性のある高品質なコードとドキュメントを生成してください。
 
+## 技術スタック前提
+
+| 領域 | 技術 |
+|------|------|
+| WEBバックエンド | .NET (C#) |
+| WEBフロントエンド | React (TypeScript) |
+| モバイルアプリ | .NET MAUI (C#) |
+
 ## 基本原則
 
 1. **正確性最優先**: 推測より調査。不明点があれば既存コードを読み、パターンを確認してから回答する
@@ -27,6 +35,10 @@
 │   ├── views/                 # ビュー定義
 │   └── migrations/            # マイグレーションスクリプト
 ├── skills/                    # AIスキル定義
+│   ├── brainstorming/         # ブレインストーミング（設計探索）
+│   ├── test-driven-development/ # テスト駆動開発（TDD）
+│   ├── systematic-debugging/  # 体系的デバッグ
+│   ├── verification/          # 完了前検証
 │   ├── create-spec/           # 仕様書作成スキル
 │   ├── create-plan/           # 実装計画作成スキル
 │   ├── context-map/           # コンテキストマップ作成
@@ -34,7 +46,9 @@
 │   ├── sql-review/            # SQLレビュースキル
 │   ├── refactor/              # リファクタリングスキル
 │   ├── git-commit/            # Gitコミットスキル
-│   └── doc-writer/            # ドキュメント作成スキル
+│   ├── doc-writer/            # ドキュメント作成スキル
+│   ├── react-performance/     # Reactパフォーマンス最適化（Vercelベストプラクティス）
+│   └── ui-design/             # UI/UXデザインガイドライン
 ├── instructions/              # 自動適用されるコーディング規約
 │   ├── security.instructions.md
 │   ├── code-review.instructions.md
@@ -43,23 +57,28 @@
 │   ├── debug.agent.md
 │   ├── architect.agent.md
 │   └── critical-thinking.agent.md
-├── memory-bank/               # プロジェクト記憶（セッション間持続）
-│   ├── projectbrief.md
-│   ├── activeContext.md
-│   ├── systemPatterns.md
-│   ├── techContext.md
-│   ├── progress.md
-│   └── tasks/
-│       └── _index.md
-└── temp/                      # AIタスク計画・一時ファイル
-    └── .gitkeep
+└── memory-bank/               # プロジェクト記憶（セッション間持続）
+    ├── projectbrief.md
+    ├── activeContext.md
+    ├── systemPatterns.md
+    ├── techContext.md
+    ├── progress.md
+    └── tasks/
+        └── _index.md
+
 ```
 
 ### ファイル参照ルール
+- 新機能の設計時 → まず `skills/brainstorming/` でブレインストーミング
 - 仕様書を書くとき → `docs/spec/` のテンプレートに従う
 - 実装計画を書くとき → `docs/plan/` のテンプレートに従う
+- コード実装時 → `skills/test-driven-development/` のTDDサイクルに従う
+- バグ修正時 → `skills/systematic-debugging/` の4フェーズに従う
+- 完了宣言前 → `skills/verification/` で検証を実施
 - DB変更をするとき → `db/` 配下の既存DDLとの整合性を確認する
 - コードレビュー時 → `instructions/code-review.instructions.md` のルールに従う
+- React実装・レビュー時 → `skills/react-performance/` のパフォーマンス最適化ルールに従う
+- UI/UX設計・レビュー時 → `skills/ui-design/` のデザインガイドラインに従う
 
 ## コーディング規約
 
@@ -89,15 +108,26 @@
 - 認証・認可: 最小権限の原則に従う
 - HTTPS: ネットワーク通信は常にHTTPS
 
+## 鉄則（Iron Laws）
+
+これらは例外なしの絶対ルールである:
+
+1. **テストなしの本番コードは禁止** — テストが先に失敗するのを確認してからコードを書く
+2. **根本原因の調査なしに修正を行わない** — 症状の修正は失敗。フェーズ1（調査）を完了してから修正する
+3. **最新の検証証拠なしに完了を宣言しない** — 「通るはず」は禁止。コマンド実行 → 出力確認 → 宣言の順
+4. **設計承認なしに実装を開始しない** — シンプルに見えても、まず設計を提示してユーザーの承認を得る
+
 ## ワークフロー
 
 ### 機能開発の流れ
-1. **分析** → 要件を理解し、`docs/spec/` に仕様書を作成
-2. **設計** → アーキテクチャを検討し、`docs/design/` に設計書を作成
-3. **計画** → 実装ステップを `docs/plan/` に作成
-4. **実装** → 小さな単位でコーディング＋テスト
-5. **検証** → テスト実行、コードレビュー
-6. **振り返り** → ドキュメント更新、memory-bank更新
+1. **ブレインストーミング** → 要件を対話的に探索し、設計を固める（`skills/brainstorming/`）
+2. **分析** → 要件を理解し、`docs/spec/` に仕様書を作成
+3. **設計** → アーキテクチャを検討し、`docs/design/` に設計書を作成
+4. **計画** → 実装ステップを `docs/plan/` に作成
+5. **実装** → TDDサイクル（RED→GREEN→REFACTOR）で小さな単位でコーディング
+6. **検証** → テスト実行、完了前検証スキルで証拠を確認
+7. **レビュー** → コードレビュー
+8. **振り返り** → ドキュメント更新、memory-bank更新
 
 ### コミットメッセージ規約（Conventional Commits）
 ```
