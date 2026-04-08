@@ -1,7 +1,6 @@
 #  汎用 Code as Doc テンプレート
 
-AI駆動開発のための `.github` フォルダテンプレートです。  
-[awesome-copilot](https://github.com/microsoft/awesome-copilot) プロジェクトのベストプラクティスを参考に構築しています。
+AI駆動開発のための `.github` フォルダテンプレートです。
 
 ## フォルダ構成
 
@@ -91,23 +90,3 @@ my-copilot/
 - `hooks/closeout-guard.json` は、コピー後に `.github/hooks/closeout-guard.json` として読み込まれます
 - Stop hook は、重要な変更があるのに MemoryBank の `activeContext.md` と `progress.md` が未更新なら終了をブロックします
 - docs を更新しない場合は hook だけでは完全判定できないため、instructions と skills で更新要否を判定し、final answer に未更新理由を残します
-
-## 参考にしたプロジェクト内リソース
-
-| リソース | 参考元 | 改善ポイント |
-|---------|--------|-------------|
-| 仕様書テンプレート | `skills/create-specification/` | 日本語化、フォーマット簡素化 |
-| 実装計画テンプレート | `skills/create-implementation-plan/` | 日本語化、ステータス管理追加 |
-| コンテキストマップ | `skills/context-map/` | 日本語化、リスク評価項目追加 |
-| コードレビュー | `instructions/code-review-generic` | 日本語化、優先度体系整理 |
-| セキュリティ | `instructions/security-and-owasp` | 日本語化、実用的に圧縮 |
-| SQLレビュー | `skills/sql-code-review/` | 日本語化 |
-| リファクタリング | `skills/refactor/` | 日本語化、判断基準追加 |
-| Gitコミット | `skills/git-commit/` | 日本語化、セーフティプロトコル |
-| ドキュメント作成 | `skills/documentation-writer/` | 日本語化、Diátaxis対応 |
-| デバッグ | `agents/debug.agent.md` | 日本語化 |
-| アーキテクト | `agents/arch.agent.md` | 日本語化、出力先統一 |
-| クリティカルシンキング | `agents/critical-thinking.agent.md` | 日本語化 |
-| memory-bank | `instructions/memory-bank` | 日本語化、テンプレート付与 |
-| ドキュメント同期 | `instructions/update-docs-on-code-change` | 日本語化、DB対応追加 |
-| ワークフロー | `instructions/spec-driven-workflow-v1` | copilot-instructions.md に統合 |
