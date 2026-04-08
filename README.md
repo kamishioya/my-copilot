@@ -25,6 +25,7 @@ my-copilot/
 │   ├── create-spec/SKILL.md         #    仕様書作成
 │   ├── create-plan/SKILL.md         #    実装計画作成
 │   ├── context-map/SKILL.md         #    コンテキストマップ（影響範囲分析）
+│   ├── design-sync/SKILL.md         #    既存仕様書・設計書の差分同期
 │   ├── code-review/SKILL.md         #    コードレビュー
 │   ├── sql-review/SKILL.md          #    SQLレビュー
 │   ├── refactor/SKILL.md            #    リファクタリング
@@ -36,6 +37,11 @@ my-copilot/
 │   ├── commenting.instructions.md   #    コメント運用ルール
 │   ├── code-review.instructions.md  #    コードレビュー基準
 │   └── update-docs.instructions.md  #    ドキュメント同期更新ルール
+│
+├── hooks/                           # 🪝 実行時フック
+│   ├── closeout-guard.json          #    終了前の closeout 検査
+│   └── scripts/
+│       └── closeout-guard.ps1       #    MemoryBank / docs 更新のガード
 │
 ├── agents/                          # 🤖 カスタムエージェント
 │   ├── debug.agent.md               #    デバッグモード（体系的バグ解決）
@@ -68,6 +74,7 @@ my-copilot/
 | 新機能の仕様作成 | `create-spec` スキル → `docs/spec/` |
 | 実装計画の作成 | `create-plan` スキル → `docs/plan/` |
 | 実装前の影響範囲分析 | `context-map` スキル |
+| 既存仕様書・設計書の差分同期 | `design-sync` スキル |
 | アーキテクチャ設計 | `architect` エージェント → `docs/design/` |
 | コード実装時のコメント品質統一 | `commenting` スキル |
 | コードレビュー | `code-review` スキル |
@@ -77,6 +84,13 @@ my-copilot/
 | ドキュメント作成 | `doc-writer` スキル |
 | デバッグ | `debug` エージェント |
 | アプローチ検証 | `critical-thinking` エージェント |
+
+## hooks について
+
+- このテンプレートは、対象プロジェクトの `.github/` としてコピーして使う前提です
+- `hooks/closeout-guard.json` は、コピー後に `.github/hooks/closeout-guard.json` として読み込まれます
+- Stop hook は、重要な変更があるのに MemoryBank の `activeContext.md` と `progress.md` が未更新なら終了をブロックします
+- docs を更新しない場合は hook だけでは完全判定できないため、instructions と skills で更新要否を判定し、final answer に未更新理由を残します
 
 ## 参考にしたプロジェクト内リソース
 

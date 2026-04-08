@@ -54,6 +54,9 @@
 │   ├── security.instructions.md
 │   ├── code-review.instructions.md
 │   └── update-docs.instructions.md
+├── hooks/                     # 実行時フック（終了前ガード、コンテキスト注入）
+│   ├── *.json
+│   └── scripts/
 ├── agents/                    # カスタムエージェント定義
 │   ├── debug.agent.md
 │   ├── architect.agent.md
@@ -70,9 +73,11 @@
 ```
 
 ### ファイル参照ルール
+- 変更着手前・バグ修正前 → `skills/context-map/` で影響範囲とドキュメント更新要否を判定する
 - 新機能の設計時 → まず `skills/brainstorming/` でブレインストーミング
 - 仕様書を書くとき → `docs/spec/` のテンプレートに従う
 - 実装計画を書くとき → `docs/plan/` のテンプレートに従う
+- 既存仕様書・設計書の差分同期 → `skills/design-sync/` を使って最小差分で更新する
 - コード実装時 → `skills/test-driven-development/` と `skills/commenting/` を必ず参照する
 - バグ修正時 → `skills/systematic-debugging/` の4フェーズに従う
 - 完了宣言前 → `skills/verification/` で検証を実施
@@ -119,6 +124,7 @@
 2. **根本原因の調査なしに修正を行わない** — 症状の修正は失敗。フェーズ1（調査）を完了してから修正する
 3. **最新の検証証拠なしに完了を宣言しない** — 「通るはず」は禁止。コマンド実行 → 出力確認 → 宣言の順
 4. **設計承認なしに実装を開始しない** — シンプルに見えても、まず設計を提示してユーザーの承認を得る
+5. **ドキュメントと MemoryBank の更新要否を判定せずに完了を宣言しない** — 未更新なら理由を残す
 
 ## ワークフロー
 
@@ -130,7 +136,7 @@
 5. **実装** → TDDサイクル（RED→GREEN→REFACTOR）とコメント運用スキルで、小さな単位でコーディング
 6. **検証** → テスト実行、完了前検証スキルで証拠を確認
 7. **レビュー** → コードレビューとコメント品質レビュー
-8. **振り返り** → ドキュメント更新、memory-bank更新
+8. **クローズアウト** → ドキュメント同期、memory-bank更新、未更新理由の記録
 
 ### コミットメッセージ規約（Conventional Commits）
 ```
@@ -153,6 +159,9 @@ chore:    その他雑務
 - 重要な変更後: `activeContext.md` と `progress.md` を更新
 - タスク管理: `tasks/` フォルダでタスクごとにファイルを管理
 - パターン発見時: `systemPatterns.md` に記録
+- repo に `memory-bank/activeContext.md` と `memory-bank/progress.md` がある場合、それらが authoritative source である
+- ツール側メモリは補助情報であり、repo の MemoryBank の代替にしてはならない
+- 関連ドキュメントを更新しない判断をした場合も、その理由を MemoryBank と final answer に残す
 
 ## レスポンス言語
 
