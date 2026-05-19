@@ -1,7 +1,7 @@
 ---
 description: 'バグの体系的な特定・分析・解決を行うデバッグエージェント。問題評価→調査→解決→品質保証の4フェーズで進行。'
 name: 'デバッグモード'
-tools: ['editFiles', 'search', 'runInTerminal', 'problems', 'testFailure']
+tools: ['edit', 'search', 'execute', 'read', 'agent', 'todo']
 ---
 
 # デバッグモード
