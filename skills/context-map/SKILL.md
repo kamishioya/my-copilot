@@ -17,7 +17,7 @@ description: '変更実施前にコードとドキュメントの影響範囲を
 2. 直接的な依存関係（import/export）を特定する
 3. 関連するテストを見つける
 4. 既存コード内の類似パターンを探す
-5. 関連する `docs/spec/`、`docs/design/`、`docs/plan/`、`README.md`、`db/`、`memory-bank/` の更新要否を判定する
+5. 関連する `docs/requirements/`、`docs/basic-design/`、`docs/spec/`、`docs/plan/`、`README.md`、`db/`、`memory-bank/` の更新要否を判定する
 6. 識別子生成、重複判定、checkpoint / resume / idempotency、screening / 分類ルールの変更が含まれるか確認する
 
 ## 出力フォーマット
@@ -48,8 +48,9 @@ description: '変更実施前にコードとドキュメントの影響範囲を
 ### ドキュメント更新判定表
 | 対象 | 判定 | 理由 | 想定アクション |
 |------|------|------|----------------|
-| docs/spec/... | 更新する / しない | 判断理由 | 変更点の要約 |
-| docs/design/... | 更新する / しない | 判断理由 | 変更点の要約 |
+| docs/requirements/... | 更新する / しない | 判断理由 | 変更点の要約 |
+| docs/basic-design/... | 更新する / しない | 判断理由 | 変更点の要約 |
+| docs/spec/screens/... or docs/spec/business-logic/... | 更新する / しない | 判断理由 | 変更点の要約 |
 | docs/plan/... | 更新する / しない | 判断理由 | 変更点の要約 |
 | README.md | 更新する / しない | 判断理由 | 変更点の要約 |
 | db/... | 更新する / しない | 判断理由 | 変更点の要約 |

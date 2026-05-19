@@ -1,15 +1,15 @@
 ---
-name: design-sync
-description: '既存の仕様書・設計書を実装差分に合わせて最小更新する。バグ修正、仕様差分、識別子生成、sourceItemId/itemId、checkpoint、dedup、idempotency、screening、分類ルールの変更時に使用する。'
+name: docs-sync
+description: '既存ドキュメントを実装差分に合わせて最小更新する。バグ修正、仕様差分、識別子生成、sourceItemId/itemId、checkpoint、dedup、idempotency、screening、分類ルールの変更時に使用する。'
 ---
 
-# 設計差分同期スキル
+# ドキュメント差分同期スキル
 
-既存の仕様書・設計書を、実装差分に合わせて最小限の修正で同期する。
+既存ドキュメントを、実装差分に合わせて最小限の修正で同期する。
 
 ## 目的
 
-- 新規ドキュメントを作るのではなく、既存の `docs/spec/`、`docs/design/`、`docs/plan/`、`README.md` を stale な記述だけ更新する
+- 新規ドキュメントを作るのではなく、既存の `docs/requirements/`、`docs/basic-design/`、`docs/spec/`、`docs/plan/`、`README.md` を stale な記述だけ更新する
 - コード修正後に残りやすい「古い説明」「古い契約」「古い業務ルール」を取り除く
 - MemoryBank の `activeContext.md` と `progress.md` に、更新内容または未更新理由を残す
 
@@ -26,7 +26,7 @@ description: '既存の仕様書・設計書を実装差分に合わせて最小
 ## 手順
 
 1. 実装差分とテスト差分を確認し、挙動の変化点を箇条書きにする
-2. 関連する `docs/spec/`、`docs/design/`、`docs/plan/`、`README.md`、`memory-bank/` を特定する
+2. 関連する `docs/requirements/`、`docs/basic-design/`、`docs/spec/`、`docs/plan/`、`README.md`、`memory-bank/` を特定する
 3. 各ドキュメントについて、更新する / しない / 理由 を決める
 4. stale な記述だけを最小差分で更新し、未変更部分の構成や文体は保つ
 5. 用語、フィールド名、状態名、受入基準をコードと一致させる
@@ -35,7 +35,7 @@ description: '既存の仕様書・設計書を実装差分に合わせて最小
 ## 出力フォーマット
 
 ```markdown
-## 設計同期計画
+## ドキュメント同期計画
 
 ### 実装差分の要約
 - 変更点1
@@ -44,8 +44,9 @@ description: '既存の仕様書・設計書を実装差分に合わせて最小
 ### 更新対象ドキュメント
 | ファイル | 判定 | 理由 | 予定する最小変更 |
 |---------|------|------|------------------|
-| docs/spec/... | 更新する / しない | 判断理由 | 変更点 |
-| docs/design/... | 更新する / しない | 判断理由 | 変更点 |
+| docs/requirements/... | 更新する / しない | 判断理由 | 変更点 |
+| docs/basic-design/... | 更新する / しない | 判断理由 | 変更点 |
+| docs/spec/screens/... or docs/spec/business-logic/... | 更新する / しない | 判断理由 | 変更点 |
 | docs/plan/... | 更新する / しない | 判断理由 | 変更点 |
 | README.md | 更新する / しない | 判断理由 | 変更点 |
 
@@ -58,6 +59,7 @@ description: '既存の仕様書・設計書を実装差分に合わせて最小
 
 ## 境界
 
-- 大規模な新規アーキテクチャ文書を作る場合は `architect` エージェントを使う
+- 新しい基本設計書群を作る場合は `create-basic-design` スキルを使う
+- Mermaid 図やアーキテクチャ判断が重い場合は `architect` エージェントを使う
 - 変更前の影響範囲が未整理なら、先に `context-map` スキルで候補を洗い出す
 - docs を更新しない場合でも、未更新理由を final answer に明記する

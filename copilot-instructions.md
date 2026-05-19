@@ -25,9 +25,12 @@
 ```
 .github/
 ├── copilot-instructions.md    # この指示書（汎用ルール）
-├── docs/                      # プログラム仕様書・設計書
-│   ├── spec/                  # 仕様書（AI最適化フォーマット）
-│   ├── design/                # 設計書・アーキテクチャ決定記録
+├── docs/                      # 要件定義・設計書
+│   ├── requirements/          # 要件定義（会話で確定した内容を整理）
+│   ├── basic-design/          # 基本設計（画面一覧、DB定義、IF定義など）
+│   ├── spec/                  # 詳細設計
+│   │   ├── screens/           # 画面単位の仕様
+│   │   └── business-logic/    # ビジネスロジック単位の仕様
 │   └── plan/                  # 実装計画書
 ├── db/                        # データベース関連
 │   ├── tables/                # テーブル定義（CREATE TABLE文）
@@ -40,7 +43,9 @@
 │   ├── test-driven-development/ # テスト駆動開発（TDD）
 │   ├── systematic-debugging/  # 体系的デバッグ
 │   ├── verification/          # 完了前検証
-│   ├── create-spec/           # 仕様書作成スキル
+│   ├── create-basic-design/   # 基本設計書作成スキル
+│   ├── create-requirements/   # 要件定義作成スキル
+│   ├── create-spec/           # 詳細設計書作成スキル
 │   ├── create-plan/           # 実装計画作成スキル
 │   ├── context-map/           # コンテキストマップ作成
 │   ├── code-review/           # コードレビュースキル
@@ -75,9 +80,11 @@
 ### ファイル参照ルール
 - 変更着手前・バグ修正前 → `skills/context-map/` で影響範囲とドキュメント更新要否を判定する
 - 新機能の設計時 → まず `skills/brainstorming/` でブレインストーミング
-- 仕様書を書くとき → `docs/spec/` のテンプレートに従う
+- 要件定義を書くとき → `docs/requirements/` のテンプレートに従う
+- 基本設計を書くとき → `skills/create-basic-design/` と `docs/basic-design/` のテンプレートに従う
+- 詳細設計を書くとき → `docs/spec/` のテンプレートに従う
 - 実装計画を書くとき → `docs/plan/` のテンプレートに従う
-- 既存仕様書・設計書の差分同期 → `skills/design-sync/` を使って最小差分で更新する
+- 既存ドキュメントの差分同期 → `skills/docs-sync/` を使って最小差分で更新する
 - コード実装時 → `skills/test-driven-development/` と `skills/commenting/` を必ず参照する
 - バグ修正時 → `skills/systematic-debugging/` の4フェーズに従う
 - 完了宣言前 → `skills/verification/` で検証を実施
@@ -129,14 +136,15 @@
 ## ワークフロー
 
 ### 機能開発の流れ
-1. **ブレインストーミング** → 要件を対話的に探索し、設計を固める（`skills/brainstorming/`）
-2. **分析** → 要件を理解し、`docs/spec/` に仕様書を作成
-3. **設計** → アーキテクチャを検討し、`docs/design/` に設計書を作成
-4. **計画** → 実装ステップを `docs/plan/` に作成
-5. **実装** → TDDサイクル（RED→GREEN→REFACTOR）とコメント運用スキルで、小さな単位でコーディング
-6. **検証** → テスト実行、完了前検証スキルで証拠を確認
-7. **レビュー** → コードレビューとコメント品質レビュー
-8. **クローズアウト** → ドキュメント同期、memory-bank更新、未更新理由の記録
+1. **ブレインストーミング** → 要件を対話的に探索し、方向性を固める（`skills/brainstorming/`）
+2. **要件定義** → 会話で決まった内容を `docs/requirements/` に整理する
+3. **基本設計** → `create-basic-design` を使って、画面一覧、DB定義、IF定義などを `docs/basic-design/` に分割して作成する
+4. **詳細設計** → 画面単位・ビジネスロジック単位の仕様を `docs/spec/` に作成する
+5. **計画** → 実装ステップを `docs/plan/` に作成
+6. **実装** → TDDサイクル（RED→GREEN→REFACTOR）とコメント運用スキルで、小さな単位でコーディング
+7. **検証** → テスト実行、完了前検証スキルで証拠を確認
+8. **レビュー** → コードレビューとコメント品質レビュー
+9. **クローズアウト** → ドキュメント同期、memory-bank更新、未更新理由の記録
 
 ### コミットメッセージ規約（Conventional Commits）
 ```

@@ -8,9 +8,12 @@ AI駆動開発のための `.github` フォルダテンプレートです。
 my-copilot/
 ├── copilot-instructions.md          # 🎯 汎用AI指示書（プロジェクト全体のルール）
 │
-├── docs/                            # 📄 プログラム仕様書・設計書
-│   ├── spec/                        #    仕様書（AI最適化フォーマット）
-│   ├── design/                      #    設計書・アーキテクチャ決定記録
+├── docs/                            # 📄 要件定義・設計書・実装計画
+│   ├── requirements/                #    要件定義（会話で確定した内容を整理）
+│   ├── basic-design/                #    基本設計（画面一覧、DB定義、IF定義など）
+│   ├── spec/                        #    詳細設計
+│   │   ├── screens/                 #    画面単位の仕様
+│   │   └── business-logic/          #    ビジネスロジック単位の仕様
 │   └── plan/                        #    実装計画書
 │
 ├── db/                              # 🗄️ データベース関連
@@ -21,10 +24,12 @@ my-copilot/
 │
 ├── skills/                          # 🛠️ AIスキル定義
 │   ├── commenting/SKILL.md          #    コメント運用（WHY重視・日本語コメント）
-│   ├── create-spec/SKILL.md         #    仕様書作成
+│   ├── create-basic-design/SKILL.md #    基本設計書作成
+│   ├── create-requirements/SKILL.md #    要件定義作成
+│   ├── create-spec/SKILL.md         #    詳細設計書作成
 │   ├── create-plan/SKILL.md         #    実装計画作成
 │   ├── context-map/SKILL.md         #    コンテキストマップ（影響範囲分析）
-│   ├── design-sync/SKILL.md         #    既存仕様書・設計書の差分同期
+│   ├── docs-sync/SKILL.md           #    既存ドキュメントの差分同期
 │   ├── code-review/SKILL.md         #    コードレビュー
 │   ├── sql-review/SKILL.md          #    SQLレビュー
 │   ├── refactor/SKILL.md            #    リファクタリング
@@ -70,11 +75,13 @@ my-copilot/
 
 | やること | 使うもの |
 |---------|---------|
-| 新機能の仕様作成 | `create-spec` スキル → `docs/spec/` |
+| 要件定義の整理 | `create-requirements` スキル → `docs/requirements/` |
+| 基本設計書の作成 | `create-basic-design` スキル → `docs/basic-design/` |
+| 詳細設計書の作成 | `create-spec` スキル → `docs/spec/` |
 | 実装計画の作成 | `create-plan` スキル → `docs/plan/` |
 | 実装前の影響範囲分析 | `context-map` スキル |
-| 既存仕様書・設計書の差分同期 | `design-sync` スキル |
-| アーキテクチャ設計 | `architect` エージェント → `docs/design/` |
+| 既存ドキュメントの差分同期 | `docs-sync` スキル |
+| アーキテクチャ図の作成 | `architect` エージェント → `docs/basic-design/` |
 | コード実装時のコメント品質統一 | `commenting` スキル |
 | コードレビュー | `code-review` スキル |
 | SQLレビュー | `sql-review` スキル |

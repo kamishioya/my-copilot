@@ -17,7 +17,7 @@ applyTo: '**'
 ## 実装前後の必須チェック
 
 ### 実装前
-- [ ] 影響する `docs/spec/`、`docs/design/`、`docs/plan/`、`README.md`、`db/`、`memory-bank/` の候補を列挙する
+- [ ] 影響する `docs/requirements/`、`docs/basic-design/`、`docs/spec/`、`docs/plan/`、`README.md`、`db/`、`memory-bank/` の候補を列挙する
 - [ ] 各候補について「更新する / しない / 理由」を判断する
 
 ### 実装後
@@ -29,7 +29,9 @@ applyTo: '**'
 
 ### 新機能追加時
 - [ ] README.md の機能一覧を更新
-- [ ] 該当する仕様書（`docs/spec/`）を更新
+- [ ] 該当する要件定義（`docs/requirements/`）を更新
+- [ ] 該当する基本設計（`docs/basic-design/`）を更新
+- [ ] 該当する詳細設計（`docs/spec/screens/` または `docs/spec/business-logic/`）を更新
 - [ ] 実装計画書のステータスを更新
 - [ ] memory-bank の progress.md を更新
 
@@ -54,26 +56,30 @@ applyTo: '**'
 ### DB変更時
 - [ ] `db/` 配下の該当ファイルを更新
 - [ ] マイグレーションスクリプトを追加
-- [ ] 関連する仕様書のデータモデルセクションを更新
+- [ ] `docs/basic-design/database-definition.md` と `docs/basic-design/field-definitions.md` を更新
+- [ ] 関連する詳細設計を更新
 
 ### 識別子生成・正規化・選択規則の変更時
-- [ ] `docs/spec/` の識別子契約、キー定義、受入基準を更新
-- [ ] `docs/design/` のデータフロー、正規化ロジック、永続化ルールを更新
+- [ ] 必要に応じて `docs/requirements/04-business-rules.md` を更新
+- [ ] `docs/basic-design/` のデータフロー、正規化ロジック、永続化ルールを更新
+- [ ] `docs/spec/business-logic/` の識別子契約、キー定義、受入基準を更新
 
 ### 重複判定・照合・dedup 規則の変更時
-- [ ] `docs/spec/` の判定条件、優先順位、例外ケースを更新
-- [ ] `docs/design/` の照合ロジックと副作用を更新
+- [ ] 必要に応じて `docs/requirements/04-business-rules.md` を更新
+- [ ] `docs/basic-design/` の照合ロジックと副作用を更新
+- [ ] `docs/spec/business-logic/` の判定条件、優先順位、例外ケースを更新
 
 ### checkpoint / resume / retry / idempotency ロジックの変更時
-- [ ] `docs/design/` の状態遷移、再開条件、冪等性保証を更新
-- [ ] `docs/spec/` の運用要件と失敗時挙動を更新
+- [ ] `docs/basic-design/` の状態遷移、再開条件、冪等性保証を更新
+- [ ] `docs/spec/business-logic/` の運用要件と失敗時挙動を更新
 
 ### screening・分類・業務ルールの変更時
-- [ ] `docs/spec/` のルール定義、分類条件、受入基準を更新
-- [ ] `docs/design/` の判定順序、入力、出力、監査ポイントを更新
+- [ ] `docs/requirements/04-business-rules.md` のルール定義を更新
+- [ ] `docs/basic-design/` の判定順序、入力、出力、監査ポイントを更新
+- [ ] `docs/spec/business-logic/` の分類条件、受入基準を更新
 
 ### バグ修正でも外部挙動または内部契約が変わる時
-- [ ] 関連する `docs/spec/` と `docs/design/` を更新
+- [ ] 関連する `docs/requirements/`、`docs/basic-design/`、`docs/spec/` を更新
 - [ ] 変更が利用手順に影響する場合は README.md も更新
 
 ## 完了条件
